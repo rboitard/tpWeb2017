@@ -45,3 +45,24 @@ function updateShapeList(drawing){
     span.setAttribute("class", "glyphicon glyphicon - remove - sign");
     butt.appendChild(span);
 
+    while (shapeList.firstChild) {
+        shapeList.removeChild(shapeList.firstChild);
+    }
+    drawing.getForme().forEach(function (forme) {
+        if(forme.type == 1){
+            var line = document.createElement("li");
+            line.appendChild(butt);
+            line.appendChild(document.createTextNode("LINE -  id : " + forme.id + "/" + "color : " + forme.color ));
+            line.setAttribute("id", forme.id); 
+            shapeList.appendChild(line);
+        }
+        else if(forme.type == 0){
+            var rect = document.createElement("li");
+            rect.appendChild(butt);
+            rect.appendChild(document.createTextNode("RECT - id : " + forme.id + "/" + "color : " + forme.color));
+            rect.setAttribute("id", forme.id);
+            shapeList.appendChild(rect);
+        }
+        
+    });
+}
