@@ -37,18 +37,19 @@ function updateShapeList(drawing){
 
     var shapeList = document.getElementById('shapeList');
 
-    var butt = document.createElement("button");
-    butt.setAttribute("class", "btn btn-default");
-    butt.setAttribute("type", "button");
 
-    var span = document.createElement("span");
-    span.setAttribute("class", "glyphicon glyphicon - remove - sign");
-    butt.appendChild(span);
 
     while (shapeList.firstChild) {
         shapeList.removeChild(shapeList.firstChild);
     }
     drawing.getForme().forEach(function (forme) {
+        var butt = document.createElement("button");
+        butt.setAttribute("class", "btn btn-default");
+        butt.setAttribute("type", "button");
+
+        var span = document.createElement("span");
+        span.setAttribute("class", "glyphicon glyphicon - remove - sign");
+        butt.appendChild(span);
         if(forme.type == 1){
             var line = document.createElement("li");
             line.appendChild(butt);
