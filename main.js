@@ -67,3 +67,5 @@ var bubLine = document.getElementById('butLine');
 var spinnerWidth = document.getElementById('spinnerWidth');
 var colour = document.getElementById('colour');
 
+colour.addEventListener("input", setColor, false);
+
