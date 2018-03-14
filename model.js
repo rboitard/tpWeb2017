@@ -3,14 +3,18 @@
 // N'oubliez pas l'héritage !
 
 function Drawing() {
-    this.listForme = new Array();
+    this.listForme = new Map();
     
     this.addForme = function (forme) {
-        this.listForme.push(forme);
+        this.listForme.set(forme.id, forme);
     }.bind(this);
 
     this.getForme = function (){
         return this.listForme;
+    }
+
+    this.removeForme = function(id){
+        delete this.listForme[id];
     }
 };
 
