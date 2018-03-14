@@ -2,6 +2,8 @@
 // La création d'un Dnd requière un canvas et un interacteur.
 // L'interacteur viendra dans un second temps donc ne vous en souciez pas au départ.
 function DnD(canvas, interactor) {
+    this.canvas = canvas;
+    this.interactor = interactor;
     this.initCoordX = 0;
     this.initCoordY = 0;
     this.finCoordX = 0;
@@ -9,25 +11,29 @@ function DnD(canvas, interactor) {
     this.pression = false;
 
     this.onTouchStart = function(evt) {
-      this.initCoordX = evt.x;
-      this.initCoordY = evt.y;
+      this.initCoordX = getMousePosition(this.canvas, evt).x;
+      this.initCoordY = getMousePosition(this.canvas, evt).y;
+      this.finCoordX = this.initCoordX
+      this.finCoordY = this.initCoordY
       this.pression = true;
+      this.interactor.onInteractionStart(this);
+      console.log("initX : " + this.initCoordX + " / initY : " + this.initCoordY);
     }.bind(this) ;
 
     this.onTouchEnd = function(evt) {
-      if(pression == true){
-        this.initCoordX = evt.x;
-        this.initCoordY = evt.y;
-        this.finCoordX = evt.x;
-        this.finCoordY = evt.y;
+      if(this.pression == true){
+        this.interactor.onInteractionEnd(this);
         this.pression = false;
+        console.log("finX : " + this.finCoordX + " / finY : " + this.finCoordY);
       }
     }.bind(this) ;
 
     this.onMove = function(evt) {
-      if(pression == true){
-        this.finCoordX = evt.x;
-        this.finCoordY = evt.y;
+      if(this.pression == true){
+        this.finCoordX = getMousePosition(this.canvas, evt).x;
+        this.finCoordY = getMousePosition(this.canvas, evt).y;
+        this.interactor.onInteractionUpdate(this);
+        console.log("finX : " + this.finCoordX + " / finY : " + this.finCoordY);
       }
     }.bind(this) ;
   
